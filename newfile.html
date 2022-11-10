@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新建Jvav工程</title>
+		<link rel="icon" href="icon.png"/>
+		<link type="text/css" rel="stylesheet" href="https://api.urasoft.top/api/uramain/uramain.min.css"/>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.js"></script>
+		<script src="js/noright.js"></script>
+		<script src="js/jvav.js"></script>
+		<style>
+			@font-face {
+			  font-family: 'iconfont';
+			  src: url('font/iconfont.woff2?t=1666428224222') format('woff2'),
+			       url('font/iconfont.woff?t=1666428224222') format('woff'),
+			       url('font/iconfont.ttf?t=1666428224222') format('truetype');
+			}
+			.iconfont {
+			  font-family: "iconfont" !important;
+			  font-size: 18px;
+			  font-style: normal;
+			  -webkit-font-smoothing: antialiased;
+			  -moz-osx-font-smoothing: grayscale;
+			}
+			.center{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				width: 100%;
+			}
+			.middle{
+				position: absolute;
+				text-align: center;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+			:root{
+				background-color:#2b2b2b ;
+				color: #f1f1f1;
+			}
+			#codetext{
+				display: inline-block;
+				width: 80%;
+				height: 60%;
+				resize: none;
+				border: none;
+				outline: none;
+				font-size: 20px;
+				transition: all .3s;
+				padding: 10px;
+				border-radius: 10px;
+				font-family: 'microsoft yahei';
+				font-weight: bold;
+			}
+			#codetext:focus{
+				box-shadow: 0 0 10px #000;
+			}
+			#toplist{
+				display: flex;
+				align-items: center;
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 66px;
+				background-color: #fff;
+				box-shadow: 0 0 10px #000;
+				color: #000;
+				font-weight: lighter;
+			}
+			#toplist p{
+				display: inline-block;
+				margin-right: 10px;
+			}
+			.toplist-btn{
+				cursor: pointer;
+				border-radius: 5px;
+				padding: 5px;
+				transition: all .3s;
+			}
+			.toplist-btn:hover{
+				background-color: rgba(113, 113, 113, .6);
+			}
+			.toplist-btn:active{
+				background-color: rgba(113, 113, 113, .4);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="toplist">
+			<div style="position: absolute;left: 30px;">
+				<p id="toplist-save" class="toplist-btn iconfont" onclick="save()">&#xec09;保存</p>
+				<p id="toplist-run" class="toplist-btn iconfont" onclick="run()">&#xe6c1;调试&运行</p>
+				<p id="toplist-filename" class="toplist-btn iconfont" onclick="renamefile()">&#xe657;重命名项目</p>
+				<p id="toplist-back" class="toplist-btn iconfont" onclick="back()">&#xe61d;返回主页</p>
+				<p id="toplist-export" class="toplist-btn iconfont" onclick="download()">&#xe65e;导出.jvr文件</p>
+			</div>
+		</div>
+		<div class="center">
+			<textarea id="codetext" autofocus></textarea>
+		</div>
+	</body>
+	<script>
+		var code = '';
+		document.getElementById('toplist-save').onclick = function(){
+			if(code === ''){
+				layer.msg('<b style="color:#000;display:inline-block;text-shadow:none;padding:0;margin:0">请输入内容!</b>',{time:600,icon:2,shift : 6,scrollbar:false,offset:'30px'});
+			}else{
+				layer.msg('<b style="color:#000;display:inline-block;text-shadow:none;padding:0;margin:0">保存完成</b>',{time:600,icon:1,shift : 5,scrollbar:false,offset:'30px'});
+				code = document.getElementById('codetext').value;
+			}
+		}
+		function renamefile(){
+			var newname = prompt('请输入新的项目名');
+			document.getElementsByTagName('title')[0].innerText = newname;
+		}
+		function back(){
+			layer.load(1,{shade:[.8,'rgba(0,0,0,.9)']});
+			setTimeout("location.href='index.html'",400);
+		}
+		function download(){
+			var name = document.getElementsByTagName('title')[0].innerText;
+			var text = document.getElementById('codetext').value;
+			var blob = new Blob ([text],{type:'jvr/jvr'});
+			var oA = document.createElement('a');
+			var url = window.URL.createObjectURL(blob);
+			oA.download =  name + '.jvr';
+			oA.href = url;
+			document.body.appendChild(oA);
+			oA.click();
+			document.body.removeChild(oA);
+		}
+	</script>
+</html>

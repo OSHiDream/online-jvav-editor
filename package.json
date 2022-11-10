@@ -1,0 +1,12 @@
+{
+    "name":"UraSoft Jvav Editer",
+    "main":"index.html",
+    "window":{
+        "position":"center",
+		"width":900,
+		"height":600,
+		"min_width": 800,
+		"min_height": 500,
+        "icon":"icon.png"
+    }
+}
