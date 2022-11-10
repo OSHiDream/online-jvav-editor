@@ -12,7 +12,7 @@ JVAV.SPACE 是 HiDream Studio 与 UraSoft Studio 的联合项目，旨在方便�
 ## 关于本开源项目
 UraSoft Jvav Editer 的在线开源版本
 ## 可以实现的功能
-+ ####基本功能
++ #### 基本功能
 - [x] 编写 JVAV 代码
 - [x] 运行 JVAV 程序
 + #### 科学性功能
